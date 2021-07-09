@@ -11,7 +11,8 @@ class CreateMatchesTable extends Migration
         Schema::create('matches', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
-            $table->datetime('start_date');
+            $table->integer('round')->nullable();
+            $table->datetime('start_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

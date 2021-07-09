@@ -39,7 +39,7 @@ class Championship extends Model
     }
     public function championshipMatches()
     {
-        return $this->hasMany(Matche::class, 'championship_id', 'id');
+        return $this->hasMany(Matche::class, 'championship_id', 'id')->orderBy('round');
     }
 
     public function getStartDateAttribute($value)

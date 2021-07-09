@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Championship;
 use App\Models\Club;
+use App\Models\Enrollment;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -106,6 +107,22 @@ class DatabaseSeeder extends Seeder
             'category_id' => 1,
             'name' => 'Club Deportivo Universidad Católica',
             'slug' => 'Universidad Católica',
+        ]);
+        Enrollment::create([
+            'championship_id' => 1,
+            'club_id' => 1
+        ]);
+        Enrollment::create([
+            'championship_id' => 1,
+            'club_id' => 2
+        ]);
+        Enrollment::create([
+            'championship_id' => 1,
+            'club_id' => 3
+        ]);
+        Enrollment::create([
+            'championship_id' => 1,
+            'club_id' => 4
         ]);
     }
 }

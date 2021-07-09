@@ -26,6 +26,7 @@ class Matche extends Model
         'name',
         'championship_id',
         'local_id',
+        'round',
         'away_id',
         'start_date',
         'created_at',

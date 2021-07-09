@@ -73,13 +73,76 @@
     <ul class="nav nav-tabs px-3" role="tablist" id="relationship-tabs">
         <li class="nav-item">
             <a class="nav-link" href="#championship_enrollments" role="tab" data-toggle="tab">
-                {{ trans('cruds.enrollment.title') }}
+                {{ trans('cruds.club.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#championship_matches" role="tab" data-toggle="tab">
+                {{ trans('cruds.match.title') }}
             </a>
         </li>
     </ul>
     <div class="tab-content p-3">
         <div class="tab-pane" role="tabpanel" id="championship_enrollments">
-            @includeIf('admin.championships.relationships.championshipEnrollments', ['enrollments' => $championship->championshipEnrollments])
+            <table class="table table-striped table-hover table-inverse table-responsive">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Equipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($championship->championshipEnrollments as $enrollment)
+                    <tr>
+                        <td scope="row">
+                            {{ $enrollment->club->name }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane" role="tabpanel" id="championship_matches">
+            <table class="table table-striped table-hover table-inverse table-responsive">
+                <div class="w-100">
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-primary">
+                                Generar Partidos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>ID.</th>
+                        <th>Fechaº</th>
+                        <th>Local</th>
+                        <th>Visitante</th>
+                        <th>Fecha - Hora</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($championship->championshipMatches as $matche)
+                    <tr>
+                        <td scope="row">
+                            {{ $matche->id }}
+                        </td>
+                        <td>
+                            {{ $matche->round }}
+                        </td>
+                        <td>
+                            {{ $matche->local->club->name }}
+                        </td>
+                        <td>
+                            {{ $matche->away->club->name }}
+                        </td>
+                        <td>
+                            {{ $matche->start_date }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
