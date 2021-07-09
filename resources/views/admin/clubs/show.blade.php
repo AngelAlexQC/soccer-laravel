@@ -74,14 +74,14 @@
     <div class="card-header">
         {{ trans('global.relatedData') }}
     </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+    <ul class="nav nav-tabs px-3" role="tablist" id="relationship-tabs">
         <li class="nav-item">
             <a class="nav-link" href="#club_enrollments" role="tab" data-toggle="tab">
                 {{ trans('cruds.enrollment.title') }}
             </a>
         </li>
     </ul>
-    <div class="tab-content">
+    <div class="tab-content p-3">
         <div class="tab-pane" role="tabpanel" id="club_enrollments">
             @includeIf('admin.clubs.relationships.clubEnrollments', ['enrollments' => $club->clubEnrollments])
         </div>

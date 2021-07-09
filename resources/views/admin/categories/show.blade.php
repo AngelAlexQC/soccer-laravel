@@ -62,7 +62,7 @@
     <div class="card-header">
         {{ trans('global.relatedData') }}
     </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+    <ul class="nav nav-tabs px-3" role="tablist" id="relationship-tabs">
         <li class="nav-item">
             <a class="nav-link" href="#category_clubs" role="tab" data-toggle="tab">
                 {{ trans('cruds.club.title') }}
@@ -74,7 +74,7 @@
             </a>
         </li>
     </ul>
-    <div class="tab-content">
+    <div class="tab-content p-3">
         <div class="tab-pane" role="tabpanel" id="category_clubs">
             @includeIf('admin.categories.relationships.categoryClubs', ['clubs' => $category->categoryClubs])
         </div>
