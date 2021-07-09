@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use \App\Models\Match as Matche;
 use \DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,18 +30,19 @@ class Enrollment extends Model
         'deleted_at',
     ];
 
-    public function getNameAttribute($value){
-        return $this->club->slug ." - ".$this->championship->name;
+    public function getNameAttribute($value)
+    {
+        return $this->club->name . ": " . $this->championship->name;
     }
 
     public function localMatches()
     {
-        return $this->hasMany(Match::class, 'local_id', 'id');
+        return $this->hasMany(Matche::class, 'local_id', 'id');
     }
 
     public function awayMatches()
     {
-        return $this->hasMany(Match::class, 'away_id', 'id');
+        return $this->hasMany(Matche::class, 'away_id', 'id');
     }
 
     public function championship()

@@ -3,9 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Models\Enrollment;
-use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class StoreEnrollmentRequest extends FormRequest
 {
@@ -24,6 +25,10 @@ class StoreEnrollmentRequest extends FormRequest
             'championship_id' => [
                 'required',
                 'integer',
+                Rule::unique('enrollments')->where(function ($query) {
+                    return $query->where('championship_id', $this->championship_id)
+                        ->where('club_id', $this->club_id);
+                })
             ],
             'club_id' => [
                 'required',
@@ -36,6 +41,12 @@ class StoreEnrollmentRequest extends FormRequest
                 'required',
                 'array',
             ],
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'championship_id.unique' => 'El Equipo ya fue inscrito en este campeonato!',
         ];
     }
 }

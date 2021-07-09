@@ -10,8 +10,8 @@ use App\Models\Championship;
 use App\Models\Club;
 use App\Models\Enrollment;
 use App\Models\User;
-use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnrollmentController extends Controller
@@ -46,6 +46,10 @@ class EnrollmentController extends Controller
 
     public function store(StoreEnrollmentRequest $request)
     {
+        /* $existe = Enrollment::where([
+            'championship_id', '=', $request->input('championship_id'),
+            'club_id', '=', $request->input('club_id')
+        ])->first(); */
         $enrollment = Enrollment::create($request->all());
         $enrollment->players()->sync($request->input('players', []));
 

@@ -7,7 +7,7 @@ use App\Http\Requests\StoreChampionshipRequest;
 use App\Http\Requests\UpdateChampionshipRequest;
 use App\Http\Resources\Admin\ChampionshipResource;
 use App\Models\Championship;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
