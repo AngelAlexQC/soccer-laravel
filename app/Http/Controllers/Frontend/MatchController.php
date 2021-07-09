@@ -7,18 +7,18 @@ use App\Http\Requests\MassDestroyMatchRequest;
 use App\Http\Requests\StoreMatchRequest;
 use App\Http\Requests\UpdateMatchRequest;
 use App\Models\Enrollment;
-use App\Models\Match;
+use App\Models\Matche;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class MatchController extends Controller
+class MatcheController extends Controller
 {
     public function index()
     {
         abort_if(Gate::denies('match_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $matches = Match::with(['local', 'away'])->get();
+        $matches = Matche::with(['local', 'away'])->get();
 
         $enrollments = Enrollment::get();
 
@@ -38,12 +38,12 @@ class MatchController extends Controller
 
     public function store(StoreMatchRequest $request)
     {
-        $match = Match::create($request->all());
+        $match = Matche::create($request->all());
 
         return redirect()->route('frontend.matches.index');
     }
 
-    public function edit(Match $match)
+    public function edit(Matche $match)
     {
         abort_if(Gate::denies('match_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -56,14 +56,14 @@ class MatchController extends Controller
         return view('frontend.matches.edit', compact('locals', 'aways', 'match'));
     }
 
-    public function update(UpdateMatchRequest $request, Match $match)
+    public function update(UpdateMatchRequest $request, Matche $match)
     {
         $match->update($request->all());
 
         return redirect()->route('frontend.matches.index');
     }
 
-    public function show(Match $match)
+    public function show(Matche $match)
     {
         abort_if(Gate::denies('match_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -72,7 +72,7 @@ class MatchController extends Controller
         return view('frontend.matches.show', compact('match'));
     }
 
-    public function destroy(Match $match)
+    public function destroy(Matche $match)
     {
         abort_if(Gate::denies('match_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -83,7 +83,7 @@ class MatchController extends Controller
 
     public function massDestroy(MassDestroyMatchRequest $request)
     {
-        Match::whereIn('id', request('ids'))->delete();
+        Matche::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

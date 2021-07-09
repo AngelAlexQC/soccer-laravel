@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Match extends Model
+class Matche extends Model
 {
     use SoftDeletes;
     use HasFactory;
@@ -24,6 +24,7 @@ class Match extends Model
 
     protected $fillable = [
         'name',
+        'championship_id',
         'local_id',
         'away_id',
         'start_date',

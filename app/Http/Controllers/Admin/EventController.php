@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyEventRequest;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
-use App\Models\Match;
+use App\Models\Matche;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +20,7 @@ class EventController extends Controller
 
         $events = Event::with(['match'])->get();
 
-        $matches = Match::get();
+        $matches = Matche::get();
 
         return view('admin.events.index', compact('events', 'matches'));
     }
@@ -29,7 +29,7 @@ class EventController extends Controller
     {
         abort_if(Gate::denies('event_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $matches = Match::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $matches = Matche::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.events.create', compact('matches'));
     }
@@ -45,7 +45,7 @@ class EventController extends Controller
     {
         abort_if(Gate::denies('event_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $matches = Match::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $matches = Matche::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $event->load('match');
 

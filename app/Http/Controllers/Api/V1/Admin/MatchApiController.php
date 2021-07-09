@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMatchRequest;
 use App\Http\Requests\UpdateMatchRequest;
 use App\Http\Resources\Admin\MatchResource;
-use App\Models\Match;
+use App\Models\Matche;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,12 +17,12 @@ class MatchApiController extends Controller
     {
         abort_if(Gate::denies('match_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new MatchResource(Match::with(['local', 'away'])->get());
+        return new MatchResource(Matche::with(['local', 'away'])->get());
     }
 
     public function store(StoreMatchRequest $request)
     {
-        $match = Match::create($request->all());
+        $match = Matche::create($request->all());
 
         return (new MatchResource($match))
             ->response()

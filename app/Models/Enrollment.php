@@ -45,6 +45,8 @@ class Enrollment extends Model
         return $this->hasMany(Matche::class, 'away_id', 'id');
     }
 
+
+
     public function championship()
     {
         return $this->belongsTo(Championship::class, 'championship_id');

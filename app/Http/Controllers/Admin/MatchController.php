@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyMatchRequest;
 use App\Http\Requests\StoreMatchRequest;
 use App\Http\Requests\UpdateMatchRequest;
 use App\Models\Enrollment;
-use App\Models\Match;
+use App\Models\Matche;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ class MatchController extends Controller
     {
         abort_if(Gate::denies('match_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $matches = Match::with(['local', 'away'])->get();
+        $matches = Matche::with(['local', 'away'])->get();
 
         $enrollments = Enrollment::get();
 
@@ -38,7 +38,7 @@ class MatchController extends Controller
 
     public function store(StoreMatchRequest $request)
     {
-        $match = Match::create($request->all());
+        $match = Matche::create($request->all());
 
         return redirect()->route('admin.matches.index');
     }
@@ -83,7 +83,7 @@ class MatchController extends Controller
 
     public function massDestroy(MassDestroyMatchRequest $request)
     {
-        Match::whereIn('id', request('ids'))->delete();
+        Matche::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

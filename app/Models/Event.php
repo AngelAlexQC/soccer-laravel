@@ -39,7 +39,7 @@ class Event extends Model
 
     public function match()
     {
-        return $this->belongsTo(Match::class, 'match_id');
+        return $this->belongsTo(Matche::class, 'match_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

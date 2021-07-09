@@ -46,10 +46,6 @@ class EnrollmentController extends Controller
 
     public function store(StoreEnrollmentRequest $request)
     {
-        /* $existe = Enrollment::where([
-            'championship_id', '=', $request->input('championship_id'),
-            'club_id', '=', $request->input('club_id')
-        ])->first(); */
         $enrollment = Enrollment::create($request->all());
         $enrollment->players()->sync($request->input('players', []));
 

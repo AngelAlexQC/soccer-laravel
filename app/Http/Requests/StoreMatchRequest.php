@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Match;
+use App\Models\Matche;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
