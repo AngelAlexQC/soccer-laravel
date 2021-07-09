@@ -11,6 +11,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::apiResource('users', 'UsersApiController');
 
     // Club
+    Route::post('clubs/media', 'ClubApiController@storeMedia')->name('clubs.storeMedia');
     Route::apiResource('clubs', 'ClubApiController');
 
     // Category

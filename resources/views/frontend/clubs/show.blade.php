@@ -50,6 +50,18 @@
                                         {{ $club->category->name ?? '' }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.club.fields.picture') }}
+                                    </th>
+                                    <td>
+                                        @if($club->picture)
+                                            <a href="{{ $club->picture->getUrl() }}" target="_blank" style="display: inline-block">
+                                                <img src="{{ $club->picture->getUrl('thumb') }}">
+                                            </a>
+                                        @endif
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">

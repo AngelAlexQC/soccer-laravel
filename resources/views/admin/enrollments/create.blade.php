@@ -9,7 +9,7 @@
     <div class="card-body">
         <form method="POST" action="{{ route("admin.enrollments.store") }}" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="name">{{ trans('cruds.enrollment.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}">
                 @if($errors->has('name'))
@@ -18,7 +18,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.enrollment.fields.name_helper') }}</span>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label class="required" for="championship_id">{{ trans('cruds.enrollment.fields.championship') }}</label>
                 <select class="form-control select2 {{ $errors->has('championship') ? 'is-invalid' : '' }}" name="championship_id" id="championship_id" required>

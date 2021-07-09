@@ -87,6 +87,8 @@ return [
             'deleted_at_helper' => ' ',
             'category'          => 'Category',
             'category_helper'   => ' ',
+            'picture'           => 'Picture',
+            'picture_helper'    => ' ',
         ],
     ],
     'category' => [

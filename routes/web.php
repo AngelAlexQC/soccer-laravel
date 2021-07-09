@@ -19,6 +19,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Club
     Route::delete('clubs/destroy', 'ClubController@massDestroy')->name('clubs.massDestroy');
+    Route::post('clubs/media', 'ClubController@storeMedia')->name('clubs.storeMedia');
+    Route::post('clubs/ckmedia', 'ClubController@storeCKEditorImages')->name('clubs.storeCKEditorImages');
     Route::resource('clubs', 'ClubController');
 
     // Category
@@ -69,6 +71,8 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
 
     // Club
     Route::delete('clubs/destroy', 'ClubController@massDestroy')->name('clubs.massDestroy');
+    Route::post('clubs/media', 'ClubController@storeMedia')->name('clubs.storeMedia');
+    Route::post('clubs/ckmedia', 'ClubController@storeCKEditorImages')->name('clubs.storeCKEditorImages');
     Route::resource('clubs', 'ClubController');
 
     // Category

@@ -34,6 +34,9 @@
                             {{ trans('cruds.club.fields.category') }}
                         </th>
                         <th>
+                            {{ trans('cruds.club.fields.picture') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -55,6 +58,13 @@
                             </td>
                             <td>
                                 {{ $club->category->name ?? '' }}
+                            </td>
+                            <td>
+                                @if($club->picture)
+                                    <a href="{{ $club->picture->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $club->picture->getUrl('thumb') }}">
+                                    </a>
+                                @endif
                             </td>
                             <td>
                                 @can('club_show')
