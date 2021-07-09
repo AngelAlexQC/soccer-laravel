@@ -8,6 +8,7 @@ use App\Http\Requests\StoreChampionshipRequest;
 use App\Http\Requests\UpdateChampionshipRequest;
 use App\Models\Category;
 use App\Models\Championship;
+use App\Models\Matche;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,6 +65,8 @@ class ChampionshipController extends Controller
         abort_if(Gate::denies('championship_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $championship->load('category', 'championshipEnrollments');
+        $clubs = $championship->championshipEnrollments->toArray();
+        $this->generateFixtures($clubs, $championship);
 
         return view('admin.championships.show', compact('championship'));
     }
@@ -82,5 +85,60 @@ class ChampionshipController extends Controller
         Championship::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    /* @TODO: Make Routes for Generate Fixture */
+    function generateFixtures(array $clubs, Championship $championship, $includeReverseFixtures = false)
+    {
+        $numEquipos = count($clubs);
+        Matche::where('championship_id', $championship->id)->delete();
+        if ($numEquipos % 2 == 0) {
+            // Delete al matches of championship
+
+            // Generate the fixtures using the cyclic algorithm.
+            $numRondas = $numEquipos - 1;
+            $numPartidosPorRonda = $numEquipos / 2;
+            $rondas = [];
+            for ($i = 0, $k = 0; $i < $numRondas; $i++) {
+                for ($j = 0; $j < $numPartidosPorRonda; $j++) {
+                    $rondas[$i][$j] = [];
+                    $rondas[$i][$j]['local_id'] = $k;
+                    $k++;
+                    if ($k == $numRondas)
+                        $k = 0;
+                }
+            }
+            for ($i = 0; $i < $numRondas; $i++) {
+                if ($i % 2 == 0) {
+                    $rondas[$i][0]['away_id'] = $numEquipos - 1;
+                } else {
+                    $rondas[$i][0]['away_id'] = $rondas[$i][0]['local_id'];
+                    $rondas[$i][0]['local_id'] = $numEquipos - 1;
+                }
+            }
+            $equipoMasAlto = $numEquipos - 1;
+            $equipoImparMasAlto = $equipoMasAlto - 1;
+
+            for ($i = 0, $k = $equipoImparMasAlto; $i < $numRondas; $i++) {
+                for ($j = 1; $j < $numPartidosPorRonda; $j++) {
+                    $rondas[$i][$j]['away_id'] = $k;
+                    $k--;
+                    if ($k == -1)
+                        $k = $equipoImparMasAlto;
+                }
+            }
+        }
+        $enrollments = $championship->championshipEnrollments;
+        for ($i = 0; $i < count($rondas); $i++) {
+            for ($j = 0; $j < count($rondas[$i]); $j++) {
+                Matche::create([
+                    'local_id' => intval($enrollments[$rondas[$i][$j]['local_id']]->id),
+                    'away_id' => intval($enrollments[$rondas[$i][$j]['away_id']]->id),
+                    'championship_id' => $championship->id,
+                    'round' => $i + 1
+                ]);
+            }
+        }
+        return $rondas;
     }
 }
