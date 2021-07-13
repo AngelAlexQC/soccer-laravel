@@ -34,6 +34,11 @@ class Matche extends Model
         'deleted_at',
     ];
 
+    public function getNameAttribute()
+    {
+        return $this->local->name . " VS. " . $this->away->name;
+    }
+
     public function matchEvents()
     {
         return $this->hasMany(Event::class, 'match_id', 'id');

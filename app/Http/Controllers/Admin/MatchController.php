@@ -43,7 +43,7 @@ class MatchController extends Controller
         return redirect()->route('admin.matches.index');
     }
 
-    public function edit(Match $match)
+    public function edit(Matche $match)
     {
         abort_if(Gate::denies('match_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -56,14 +56,14 @@ class MatchController extends Controller
         return view('admin.matches.edit', compact('locals', 'aways', 'match'));
     }
 
-    public function update(UpdateMatchRequest $request, Match $match)
+    public function update(UpdateMatchRequest $request, Matche $match)
     {
         $match->update($request->all());
 
         return redirect()->route('admin.matches.index');
     }
 
-    public function show(Match $match)
+    public function show(Matche $match)
     {
         abort_if(Gate::denies('match_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -72,7 +72,7 @@ class MatchController extends Controller
         return view('admin.matches.show', compact('match'));
     }
 
-    public function destroy(Match $match)
+    public function destroy(Matche $match)
     {
         abort_if(Gate::denies('match_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 

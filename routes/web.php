@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::view('/', 'welcome');
 Auth::routes();
 
@@ -30,7 +33,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Championship
     Route::delete('championships/destroy', 'ChampionshipController@massDestroy')->name('championships.massDestroy');
     Route::resource('championships', 'ChampionshipController');
-
+    Route::get('generate/{championship}', 'ChampionshipController@generate')->name('championships.generate');
     // Enrollment
     Route::delete('enrollments/destroy', 'EnrollmentController@massDestroy')->name('enrollments.massDestroy');
     Route::resource('enrollments', 'EnrollmentController');

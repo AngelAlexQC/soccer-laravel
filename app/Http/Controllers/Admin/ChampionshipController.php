@@ -65,10 +65,21 @@ class ChampionshipController extends Controller
         abort_if(Gate::denies('championship_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $championship->load('category', 'championshipEnrollments');
-        $clubs = $championship->championshipEnrollments->toArray();
-        $this->generateFixtures($clubs, $championship);
 
         return view('admin.championships.show', compact('championship'));
+    }
+
+    public function generate($id)
+    {
+        $championship = Championship::findOrFail($id);
+        $clubs = $championship->championshipEnrollments->toArray();
+        $this->generateFixtures($clubs, $championship);
+        return redirect()->route('admin.championships.show', [
+            'championship' => $championship->id
+        ])->with(
+            'message',
+            'Partidos generados con éxito'
+        );
     }
 
     public function destroy(Championship $championship)
@@ -87,7 +98,7 @@ class ChampionshipController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-    /* @TODO: Make Routes for Generate Fixture */
+
     function generateFixtures(array $clubs, Championship $championship, $includeReverseFixtures = false)
     {
         $numEquipos = count($clubs);

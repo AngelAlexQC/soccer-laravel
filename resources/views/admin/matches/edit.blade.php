@@ -12,7 +12,8 @@
             @csrf
             <div class="form-group">
                 <label class="required" for="local_id">{{ trans('cruds.match.fields.local') }}</label>
-                <select class="form-control select2 {{ $errors->has('local') ? 'is-invalid' : '' }}" name="local_id" id="local_id" required>
+                <input id="local_id" name="local_id" type="hidden" value="{{ $match->local->id }}">
+                <select disabled class="form-control select2 {{ $errors->has('local') ? 'is-invalid' : '' }}" name="local_id" id="local_id" required>
                     @foreach($locals as $id => $entry)
                         <option value="{{ $id }}" {{ (old('local_id') ? old('local_id') : $match->local->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endforeach
@@ -26,7 +27,9 @@
             </div>
             <div class="form-group">
                 <label class="required" for="away_id">{{ trans('cruds.match.fields.away') }}</label>
-                <select class="form-control select2 {{ $errors->has('away') ? 'is-invalid' : '' }}" name="away_id" id="away_id" required>
+                <input id="away_id" name="away_id" type="hidden" value="{{ $match->away->id }}">
+
+                <select disabled class="form-control select2 {{ $errors->has('away') ? 'is-invalid' : '' }}" name="away_id" id="away_id" required>
                     @foreach($aways as $id => $entry)
                         <option value="{{ $id }}" {{ (old('away_id') ? old('away_id') : $match->away->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endforeach
