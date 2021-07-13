@@ -9,7 +9,7 @@ class SystemCalendarController extends Controller
 {
     public $sources = [
         [
-            'model'      => '\App\Models\Match',
+            'model'      => '\App\Models\Matche',
             'date_field' => 'start_date',
             'field'      => 'name',
             'prefix'     => 'El partido',
