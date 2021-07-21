@@ -65,7 +65,7 @@
                 </a>
             </li>
         @endcan
-        @can('match_access')
+        <!-- @can('match_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.matches.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/matches") || request()->is("admin/matches/*") ? "c-active" : "" }}">
                     <i class="fa-fw fas fa-futbol c-sidebar-nav-icon">
@@ -84,7 +84,7 @@
                     {{ trans('cruds.event.title') }}
                 </a>
             </li>
-        @endcan
+        @endcan -->
         @can('user_management_access')
             <li class="c-sidebar-nav-dropdown {{ request()->is("admin/permissions*") ? "c-show" : "" }} {{ request()->is("admin/roles*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
