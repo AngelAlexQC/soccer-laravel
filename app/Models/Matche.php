@@ -33,6 +33,30 @@ class Matche extends Model
         'updated_at',
         'deleted_at',
     ];
+    protected $appends = ['goals_local', 'goals_away', 'winner'];
+
+    public function getGoalsLocalAttribute()
+    {
+        return Event::where('type', 'goal')->where('match_id', $this->id)
+            ->where('club_id', $this->local->id)->get();
+    }
+    public function getGoalsAwayAttribute()
+    {
+        return Event::where('type', 'goal')->where('match_id', $this->id)
+            ->where('club_id', $this->away->id)->get();
+    }
+    public function getWinnerAttribute()
+    {
+        $winner = null;
+        if (count($this->goals_local) > count($this->goals_away)) {
+            $winner = $this->local;
+        }
+        if (count($this->goals_local) < count($this->goals_away)) {
+            $winner = $this->away;
+        }
+        return $winner;
+    }
+
 
     public function getNameAttribute()
     {

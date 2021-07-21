@@ -38,7 +38,7 @@ class EventController extends Controller
     {
         $event = Event::create($request->all());
 
-        return redirect()->route('admin.events.index');
+        return redirect()->back();
     }
 
     public function edit(Event $event)

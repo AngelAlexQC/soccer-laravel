@@ -32,6 +32,7 @@ class Event extends Model
         'minute',
         'description',
         'match_id',
+        'club_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -40,6 +41,10 @@ class Event extends Model
     public function match()
     {
         return $this->belongsTo(Matche::class, 'match_id');
+    }
+    public function club()
+    {
+        return $this->belongsTo(Enrollment::class, 'club_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

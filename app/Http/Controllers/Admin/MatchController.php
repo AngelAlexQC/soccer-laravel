@@ -68,8 +68,9 @@ class MatchController extends Controller
         abort_if(Gate::denies('match_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $match->load('local', 'away', 'matchEvents');
+        $matches = Matche::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.matches.show', compact('match'));
+        return view('admin.matches.show', compact('match', 'matches'));
     }
 
     public function destroy(Matche $match)
