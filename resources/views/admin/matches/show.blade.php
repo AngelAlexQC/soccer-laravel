@@ -59,7 +59,7 @@
                             Resultado
                         </th>
                         <td>
-                                {{ count($match->goals_local) ." - ". count($match->goals_away) }}
+                            {{ count($match->goals_local) ." - ". count($match->goals_away) }}
                         </td>
                     </tr>
                     <tr>
@@ -68,7 +68,7 @@
                         </th>
                         <td>
                             @if($match->winner)
-                            {{ $match->winner->name }}
+                            {{ $match->winner }}
                             @else
                             Empate
                             @endif
@@ -76,6 +76,7 @@
                     </tr>
                 </tbody>
             </table>
+
             <div class="form-group">
                 <a class="btn btn-default" href="{{ route('admin.matches.index') }}">
                     {{ trans("global.back_to_list") }}

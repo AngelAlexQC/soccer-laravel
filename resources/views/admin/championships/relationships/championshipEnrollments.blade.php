@@ -37,6 +37,9 @@
                             {{ trans('cruds.enrollment.fields.players') }}
                         </th>
                         <th>
+                            Puntos
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
