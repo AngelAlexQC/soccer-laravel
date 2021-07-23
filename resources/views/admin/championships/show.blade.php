@@ -103,7 +103,9 @@
             role="tabpanel"
             id="championship_matches"
         >
-            <table class="table table-striped table-hover table-inverse datatable">
+            <table
+                class="table table-striped table-hover table-inverse datatable"
+            >
                 <div class="w-100">
                     <div class="row mb-3">
                         <div class="col">
@@ -129,6 +131,7 @@
                         <th>Local</th>
                         <th>Visitante</th>
                         <th>Fecha - Hora</th>
+                        <th>Ganador</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -149,6 +152,11 @@
                         </td>
                         <td>
                             {{ $matche->start_date }}
+                        </td>
+                        <td>
+                            @if($matche->start_date) @if($matche->winner)
+                            {{ $matche->winner->name }}
+                            @else Empate @endif @else No Jugado @endif
                         </td>
                         <td>
                             @can('match_show')
@@ -185,6 +193,7 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>Equipo</th>
+                        <th>Puntos</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -193,6 +202,9 @@
                     <tr>
                         <td scope="row">
                             {{ $enrollment->club->name }}
+                        </td>
+                        <td scope="row">
+                            {{ $enrollment->points }}
                         </td>
                     </tr>
                     @endforeach

@@ -7,6 +7,7 @@ use \DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Enrollment extends Model
 {
@@ -50,7 +51,24 @@ class Enrollment extends Model
     /* @TODO: #1 Make Positions Table */
     public function getPointsAttribute()
     {
-        return null;
+        $points = 0;
+        $matchesWinner = 0;
+        $matches = Matche::where('championship_id', $this->championship->id)
+            ->where('local_id', $this->id)
+            ->orWhere('away_id', $this->id)->get();
+        foreach ($matches as $match) {
+            if ($match->start_date != null) {
+                if ($match->winner) {
+                    if ($match->winner->id == $this->id) {
+                        $points += 3;
+                    }
+                } else {
+                    $points += 1;
+                }
+            }
+        }
+
+        return $points;
     }
 
     public function championship()
