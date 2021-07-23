@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use stdClass;
 
 class Matche extends Model
 {
@@ -48,12 +49,20 @@ class Matche extends Model
     public function getWinnerAttribute()
     {
         $winner = null;
+        if ($this->start_date == null) {
+            $winner = null;
+        }
         if (count($this->goals_local) > count($this->goals_away)) {
             $winner = $this->local;
         }
         if (count($this->goals_local) < count($this->goals_away)) {
             $winner = $this->away;
         }
+        if (count($this->goals_local) == count($this->goals_away)) {
+            $winner = null;
+        }
+
+
         return $winner;
     }
 
