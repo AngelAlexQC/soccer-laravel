@@ -101,6 +101,7 @@ class ChampionshipController extends Controller
 
     function generateFixtures(array $clubs, Championship $championship, $includeReverseFixtures = false)
     {
+        $rondas = [];
         $numEquipos = count($clubs);
         Matche::where('championship_id', $championship->id)->delete();
         if ($numEquipos % 2 == 0) {
@@ -109,7 +110,7 @@ class ChampionshipController extends Controller
             // Generate the fixtures using the cyclic algorithm.
             $numRondas = $numEquipos - 1;
             $numPartidosPorRonda = $numEquipos / 2;
-            $rondas = [];
+
             for ($i = 0, $k = 0; $i < $numRondas; $i++) {
                 for ($j = 0; $j < $numPartidosPorRonda; $j++) {
                     $rondas[$i][$j] = [];
