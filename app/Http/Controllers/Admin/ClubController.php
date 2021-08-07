@@ -111,10 +111,10 @@ class ClubController extends Controller
     {
         abort_if(Gate::denies('club_create') && Gate::denies('club_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $model         = new Club();
-        $model->id     = $request->input('crud_id', 0);
+        $model = new Club();
+        $model->id = $request->input('crud_id', 0);
         $model->exists = true;
-        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+        $media = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }

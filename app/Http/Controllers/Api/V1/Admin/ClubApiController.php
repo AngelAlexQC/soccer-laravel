@@ -9,7 +9,6 @@ use App\Http\Requests\UpdateClubRequest;
 use App\Http\Resources\Admin\ClubResource;
 use App\Models\Club;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ClubApiController extends Controller

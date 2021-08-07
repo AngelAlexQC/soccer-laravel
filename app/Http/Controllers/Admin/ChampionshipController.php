@@ -9,8 +9,8 @@ use App\Http\Requests\UpdateChampionshipRequest;
 use App\Models\Category;
 use App\Models\Championship;
 use App\Models\Matche;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class ChampionshipController extends Controller
@@ -74,8 +74,9 @@ class ChampionshipController extends Controller
         $championship = Championship::findOrFail($id);
         $clubs = $championship->championshipEnrollments->toArray();
         $rounds = $this->generateFixtures($clubs, $championship);
+
         return redirect()->route('admin.championships.show', [
-            'championship' => $championship->id
+            'championship' => $championship->id,
         ])->with(
             'message',
             count($rounds) > 0 ? 'Partidos generados con éxito' : 'Debe haber un número par de equipos'
@@ -98,8 +99,7 @@ class ChampionshipController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-
-    function generateFixtures(array $clubs, Championship $championship, $includeReverseFixtures = false)
+    public function generateFixtures(array $clubs, Championship $championship, $includeReverseFixtures = false)
     {
         $rondas = [];
         $numEquipos = count($clubs);
@@ -116,8 +116,9 @@ class ChampionshipController extends Controller
                     $rondas[$i][$j] = [];
                     $rondas[$i][$j]['local_id'] = $k;
                     $k++;
-                    if ($k == $numRondas)
+                    if ($k == $numRondas) {
                         $k = 0;
+                    }
                 }
             }
             for ($i = 0; $i < $numRondas; $i++) {
@@ -135,8 +136,9 @@ class ChampionshipController extends Controller
                 for ($j = 1; $j < $numPartidosPorRonda; $j++) {
                     $rondas[$i][$j]['away_id'] = $k;
                     $k--;
-                    if ($k == -1)
+                    if ($k == -1) {
                         $k = $equipoImparMasAlto;
+                    }
                 }
             }
         }
@@ -147,10 +149,11 @@ class ChampionshipController extends Controller
                     'local_id' => intval($enrollments[$rondas[$i][$j]['local_id']]->id),
                     'away_id' => intval($enrollments[$rondas[$i][$j]['away_id']]->id),
                     'championship_id' => $championship->id,
-                    'round' => $i + 1
+                    'round' => $i + 1,
                 ]);
             }
         }
+
         return $rondas;
     }
 }

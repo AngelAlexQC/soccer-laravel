@@ -49,10 +49,10 @@ class EnrollmentController extends Controller
     {
         $enrollment = Enrollment::firstOrCreate([
             'championship_id' => $request->championship_id,
-            'club_id' => $request->club_id
+            'club_id' => $request->club_id,
         ]);
         $players = User::all()->map(function ($player) use ($enrollment, $request) {
-            $age =  Carbon::createFromFormat("d-m-Y", $player->birthdate)->age;
+            $age = Carbon::createFromFormat('d-m-Y', $player->birthdate)->age;
             if (is_array($request->players)) {
                 foreach ($request->players as $p) {
                     if (
@@ -64,7 +64,9 @@ class EnrollmentController extends Controller
                                 'championship_id',
                                 $enrollment->championship_id
                             )) == 0
-                    ) return $player;
+                    ) {
+                        return $player;
+                    }
                 }
             }
         });
@@ -76,7 +78,6 @@ class EnrollmentController extends Controller
 
     public function edit(Enrollment $enrollment)
     {
-
         abort_if(Gate::denies('enrollment_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $championships = Championship::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
@@ -84,7 +85,7 @@ class EnrollmentController extends Controller
         $clubs = Club::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $players = User::all()->map(function ($player) use ($enrollment) {
-            $age =  Carbon::createFromFormat("d-m-Y", $player->birthdate)->age;
+            $age = Carbon::createFromFormat('d-m-Y', $player->birthdate)->age;
             if (
                 $age - $enrollment->club->category->min_age > 0 &&
                 $enrollment->club->category->max_age > $age &&
@@ -95,8 +96,9 @@ class EnrollmentController extends Controller
                             $enrollment->championship_id
                         )
                 ) == 0
-            )
+            ) {
                 return $player;
+            }
         });
         $players = $players->merge($enrollment->players)->pluck('name', 'id');
         $enrollment->load('championship', 'club', 'players');

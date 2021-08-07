@@ -21,6 +21,16 @@
                 <span class="help-block">{{ trans('cruds.user.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="birth_date">{{ trans('cruds.user.fields.birth_date') }}</label>
+                <input class="form-control date {{ $errors->has('birth_date') ? 'is-invalid' : '' }}" type="text" name="birth_date" id="birth_date" value="{{ old('birth_date') }}" required>
+                @if($errors->has('birth_date'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('birth_date') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.birth_date_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
                 <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" id="email" value="{{ old('email', $user->email) }}" required>
                 @if($errors->has('email'))

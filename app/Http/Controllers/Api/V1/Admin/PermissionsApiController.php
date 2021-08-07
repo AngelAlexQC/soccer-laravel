@@ -8,7 +8,6 @@ use App\Http\Requests\UpdatePermissionRequest;
 use App\Http\Resources\Admin\PermissionResource;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class PermissionsApiController extends Controller

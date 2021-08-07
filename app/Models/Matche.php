@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
 use Carbon\Carbon;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use stdClass;
 
 class Matche extends Model
 {
@@ -41,11 +40,13 @@ class Matche extends Model
         return Event::where('type', 'goal')->where('match_id', $this->id)
             ->where('club_id', $this->local->id)->get();
     }
+
     public function getGoalsAwayAttribute()
     {
         return Event::where('type', 'goal')->where('match_id', $this->id)
             ->where('club_id', $this->away->id)->get();
     }
+
     public function getWinnerAttribute()
     {
         $winner = null;
@@ -62,14 +63,12 @@ class Matche extends Model
             $winner = null;
         }
 
-
         return $winner;
     }
 
-
     public function getNameAttribute()
     {
-        return $this->local->name . " VS. " . $this->away->name;
+        return $this->local->name . ' VS. ' . $this->away->name;
     }
 
     public function matchEvents()

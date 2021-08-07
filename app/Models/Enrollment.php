@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use \App\Models\Matche as Matche;
-use \DateTimeInterface;
+use App\Models\Matche as Matche;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 
 class Enrollment extends Model
 {
@@ -35,7 +34,7 @@ class Enrollment extends Model
 
     public function getNameAttribute($value)
     {
-        return $this->club->name . ": " . $this->championship->name;
+        return $this->club->name . ': ' . $this->championship->name;
     }
 
     public function localMatches()

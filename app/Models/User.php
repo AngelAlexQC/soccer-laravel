@@ -2,18 +2,14 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
-use App\Notifications\VerifyUserNotification;
 use Carbon\Carbon;
-use Hash;
+use DateTimeInterface;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash as FacadesHash;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -52,7 +48,7 @@ class User extends Authenticatable
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        self::created(function (User $user) {
+        self::created(function (self $user) {
             $registrationRole = config('panel.registration_default_role');
             if (!$user->roles()->get()->contains($registrationRole)) {
                 $user->roles()->attach($registrationRole);
@@ -101,10 +97,12 @@ class User extends Authenticatable
     {
         return $date->format('Y-m-d H:i:s');
     }
+
     public function getBirthdateAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
     }
+
     public function setBirthdateAttribute($value)
     {
         $this->attributes['birthdate'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;

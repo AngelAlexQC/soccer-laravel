@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -42,6 +42,7 @@ class Event extends Model
     {
         return $this->belongsTo(Matche::class, 'match_id');
     }
+
     public function club()
     {
         return $this->belongsTo(Enrollment::class, 'club_id');

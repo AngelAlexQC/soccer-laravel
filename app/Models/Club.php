@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -57,9 +57,9 @@ class Club extends Model implements HasMedia
     {
         $file = $this->getMedia('picture')->last();
         if ($file) {
-            $file->url       = $file->getUrl();
+            $file->url = $file->getUrl();
             $file->thumbnail = $file->getUrl('thumb');
-            $file->preview   = $file->getUrl('preview');
+            $file->preview = $file->getUrl('preview');
         }
 
         return $file;

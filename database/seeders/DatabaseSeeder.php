@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
         $this->make();
     }
 
-    function make()
+    public function make()
     {
         Championship::create([
             'category_id' => Category::create([
                 'name' => 'Categoría de prueba',
                 'min_age' => 18,
-                'max_age' => 65
+                'max_age' => 65,
             ])->id,
             'name' => 'LigaPro de Prueba',
         ]);

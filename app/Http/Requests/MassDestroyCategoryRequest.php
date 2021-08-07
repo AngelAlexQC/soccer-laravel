@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Category;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class MassDestroyCategoryRequest extends FormRequest

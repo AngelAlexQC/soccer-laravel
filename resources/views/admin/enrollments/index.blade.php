@@ -32,9 +32,6 @@
                             {{ trans("cruds.enrollment.fields.id") }}
                         </th>
                         <th>
-                            {{ trans("cruds.enrollment.fields.name") }}
-                        </th>
-                        <th>
                             {{ trans("cruds.enrollment.fields.championship") }}
                         </th>
                         <th>
@@ -100,9 +97,6 @@
                             {{ $enrollment->id ?? '' }}
                         </td>
                         <td>
-                            {{ $enrollment->name ?? '' }}
-                        </td>
-                        <td>
                             {{ $enrollment->championship->name ?? '' }}
                         </td>
                         <td>
@@ -112,45 +106,14 @@
                             {{ $enrollment->points }}
                         </td>
                         <td>
-                            @can('enrollment_show')
-                            <a
-                                class="btn btn-xs btn-primary"
-                                href="{{ route('admin.enrollments.show', $enrollment->id) }}"
-                            >
-                                {{ trans("global.view") }}
-                            </a>
-                            @endcan @can('enrollment_edit')
+                            @can('enrollment_edit')
                             <a
                                 class="btn btn-xs btn-info"
                                 href="{{ route('admin.enrollments.edit', $enrollment->id) }}"
                             >
-                                {{ trans("global.edit") }}
+                                Detalle
+                                <i class="fa fa-info" aria-hidden="true"></i>
                             </a>
-                            @endcan @can('enrollment_delete')
-                            <form
-                                action="{{ route('admin.enrollments.destroy', $enrollment->id) }}"
-                                method="POST"
-                                onsubmit="return confirm('{{
-                                    trans('global.areYouSure')
-                                }}');"
-                                style="display: inline-block"
-                            >
-                                <input
-                                    type="hidden"
-                                    name="_method"
-                                    value="DELETE"
-                                />
-                                <input
-                                    type="hidden"
-                                    name="_token"
-                                    value="{{ csrf_token() }}"
-                                />
-                                <input
-                                    type="submit"
-                                    class="btn btn-xs btn-danger"
-                                    value="{{ trans('global.delete') }}"
-                                />
-                            </form>
                             @endcan
                         </td>
                     </tr>
@@ -163,70 +126,40 @@
 
 @endsection @section('scripts') @parent
 <script>
-        $(function () {
-      let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-    @can('enrollment_delete')
-      let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-      let deleteButton = {
-        text: deleteButtonTrans,
-        url: "{{ route('admin.enrollments.massDestroy') }}",
-        className: 'btn-danger',
-        action: function (e, dt, node, config) {
-          var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-              return $(entry).data('entry-id')
-          });
+    $(function () {
+        let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons);
 
-          if (ids.length === 0) {
-            alert('{{ trans('global.datatables.zero_selected') }}')
+        $.extend(true, $.fn.dataTable.defaults, {
+            orderCellsTop: true,
+            order: [[1, "desc"]],
+            pageLength: 100,
+        });
+        let table = $(".datatable-Enrollment:not(.ajaxTable)").DataTable({
+            buttons: dtButtons,
+        });
+        $('a[data-toggle="tab"]').on("shown.bs.tab click", function (e) {
+            $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+        });
 
-            return
-          }
+        let visibleColumnsIndexes = null;
+        $(".datatable thead").on("input", ".search", function () {
+            let strict = $(this).attr("strict") || false;
+            let value =
+                strict && this.value ? "^" + this.value + "$" : this.value;
 
-          if (confirm('{{ trans('global.areYouSure') }}')) {
-            $.ajax({
-              headers: {'x-csrf-token': _token},
-              method: 'POST',
-              url: config.url,
-              data: { ids: ids, _method: 'DELETE' }})
-              .done(function () { location.reload() })
-          }
-        }
-      }
-      dtButtons.push(deleteButton)
-    @endcan
+            let index = $(this).parent().index();
+            if (visibleColumnsIndexes !== null) {
+                index = visibleColumnsIndexes[index];
+            }
 
-      $.extend(true, $.fn.dataTable.defaults, {
-        orderCellsTop: true,
-        order: [[ 1, 'desc' ]],
-        pageLength: 100,
-      });
-      let table = $('.datatable-Enrollment:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-      $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
-          $($.fn.dataTable.tables(true)).DataTable()
-              .columns.adjust();
-      });
-
-    let visibleColumnsIndexes = null;
-    $('.datatable thead').on('input', '.search', function () {
-          let strict = $(this).attr('strict') || false
-          let value = strict && this.value ? "^" + this.value + "$" : this.value
-
-          let index = $(this).parent().index()
-          if (visibleColumnsIndexes !== null) {
-            index = visibleColumnsIndexes[index]
-          }
-
-          table
-            .column(index)
-            .search(value, strict)
-            .draw()
-      });
-    table.on('column-visibility.dt', function(e, settings, column, state) {
-          visibleColumnsIndexes = []
-          table.columns(":visible").every(function(colIdx) {
-              visibleColumnsIndexes.push(colIdx);
-          });
-      })
-    })
+            table.column(index).search(value, strict).draw();
+        });
+        table.on("column-visibility.dt", function (e, settings, column, state) {
+            visibleColumnsIndexes = [];
+            table.columns(":visible").every(function (colIdx) {
+                visibleColumnsIndexes.push(colIdx);
+            });
+        });
+    });
 </script>
 @endsection

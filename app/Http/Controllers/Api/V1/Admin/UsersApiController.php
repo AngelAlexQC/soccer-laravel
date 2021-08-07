@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class UsersApiController extends Controller

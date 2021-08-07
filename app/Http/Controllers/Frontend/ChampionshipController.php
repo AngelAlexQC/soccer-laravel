@@ -8,8 +8,8 @@ use App\Http\Requests\StoreChampionshipRequest;
 use App\Http\Requests\UpdateChampionshipRequest;
 use App\Models\Category;
 use App\Models\Championship;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class ChampionshipController extends Controller

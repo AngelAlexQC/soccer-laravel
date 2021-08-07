@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\Admin\CategoryResource;
 use App\Models\Category;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CategoryApiController extends Controller

@@ -10,8 +10,8 @@ use App\Models\Championship;
 use App\Models\Club;
 use App\Models\Enrollment;
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnrollmentController extends Controller

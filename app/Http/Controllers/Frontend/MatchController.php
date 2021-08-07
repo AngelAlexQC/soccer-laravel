@@ -8,11 +8,11 @@ use App\Http\Requests\StoreMatchRequest;
 use App\Http\Requests\UpdateMatchRequest;
 use App\Models\Enrollment;
 use App\Models\Matche;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
-class MatcheController extends Controller
+class MatchController extends Controller
 {
     public function index()
     {

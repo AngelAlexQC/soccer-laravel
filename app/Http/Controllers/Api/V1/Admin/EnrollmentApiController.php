@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateEnrollmentRequest;
 use App\Http\Resources\Admin\EnrollmentResource;
 use App\Models\Enrollment;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnrollmentApiController extends Controller

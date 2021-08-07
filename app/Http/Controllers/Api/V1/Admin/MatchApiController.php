@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateMatchRequest;
 use App\Http\Resources\Admin\MatchResource;
 use App\Models\Matche;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class MatchApiController extends Controller
