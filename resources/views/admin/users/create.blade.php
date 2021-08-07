@@ -10,6 +10,16 @@
         <form method="POST" action="{{ route("admin.users.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <label class="required" for="dni">{{ trans('cruds.user.fields.dni') }}</label>
+                <input class="form-control {{ $errors->has('dni') ? 'is-invalid' : '' }}" type="text" name="dni" id="dni" value="{{ old('dni','') }}" required>
+                @if($errors->has('dni'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('dni') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.dni_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.user.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                 @if($errors->has('name'))
@@ -28,6 +38,16 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.email_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="birthdate">Fecha de Nacimiento</label>
+                <input class="form-control date {{ $errors->has('birthdate') ? 'is-invalid' : '' }}" type="text" name="birthdate" id="birthdate" value="{{ old('birthdate') }}" required>
+                @if($errors->has('birthdate'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('birthdate') }}
+                    </div>
+                @endif
+                <span class="help-block">Ingrese la fecha de Nacimiento del Jugador</span>
             </div>
             <div class="form-group">
                 <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>

@@ -46,7 +46,7 @@ return [
             'id'                       => 'ID',
             'id_helper'                => ' ',
             'name'                     => 'Nombre',
-            'birth_date'               => 'Fecha de Nacimiento',
+            'birthdate'               => 'Fecha de Nacimiento',
             'name_helper'              => ' ',
             'email'                    => 'Correo Electrónico',
             'email_helper'             => ' ',

@@ -11,6 +11,16 @@
             @method('PUT')
             @csrf
             <div class="form-group">
+                <label class="required" for="dni">{{ trans('cruds.user.fields.dni') }}</label>
+                <input class="form-control {{ $errors->has('dni') ? 'is-invalid' : '' }}" type="text" name="dni" id="dni" value="{{ old('dni', $user->dni) }}" required>
+                @if($errors->has('dni'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('dni') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.dni_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.user.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required>
                 @if($errors->has('name'))
@@ -21,14 +31,14 @@
                 <span class="help-block">{{ trans('cruds.user.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="birth_date">{{ trans('cruds.user.fields.birth_date') }}</label>
-                <input class="form-control date {{ $errors->has('birth_date') ? 'is-invalid' : '' }}" type="text" name="birth_date" id="birth_date" value="{{ old('birth_date') }}" required>
-                @if($errors->has('birth_date'))
+                <label class="required" for="birthdate">{{ trans('cruds.user.fields.birthdate') }}</label>
+                <input class="form-control date {{ $errors->has('birthdate') ? 'is-invalid' : '' }}" type="text" name="birthdate" id="birthdate" value="{{ old('birthdate', $user->birthdate) }}" required>
+                @if($errors->has('birthdate'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('birth_date') }}
+                        {{ $errors->first('birthdate') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.user.fields.birth_date_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.user.fields.birthdate_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
@@ -81,16 +91,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
             </div>
-            <div class="form-group">
-                <label class="required" for="dni">{{ trans('cruds.user.fields.dni') }}</label>
-                <input class="form-control {{ $errors->has('dni') ? 'is-invalid' : '' }}" type="text" name="dni" id="dni" value="{{ old('dni', $user->dni) }}" required>
-                @if($errors->has('dni'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('dni') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.dni_helper') }}</span>
-            </div>
+
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
