@@ -38,7 +38,6 @@ class StoreEnrollmentRequest extends FormRequest
                 'integer',
             ],
             'players' => [
-                'required',
                 'array',
             ],
         ];

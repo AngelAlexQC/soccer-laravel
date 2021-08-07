@@ -4,8 +4,6 @@
     <div class="card-header">
         {{ trans("global.show") }} {{ trans("cruds.enrollment.title") }}
     </div>
-    <!-- Show Json on Blade -->
-    <pre>{{ json_encode($enrollment, JSON_PRETTY_PRINT) }}</pre>
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">

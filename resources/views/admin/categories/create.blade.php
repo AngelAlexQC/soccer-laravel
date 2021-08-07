@@ -30,8 +30,8 @@
                 <span class="help-block">{{ trans('cruds.category.fields.min_age_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="max_age">{{ trans('cruds.category.fields.max_age') }}</label>
-                <input class="form-control {{ $errors->has('max_age') ? 'is-invalid' : '' }}" type="number" name="max_age" id="max_age" value="{{ old('max_age', '') }}" step="1">
+                <label class="required" for="max_age">{{ trans('cruds.category.fields.max_age') }}</label>
+                <input required class="form-control {{ $errors->has('max_age') ? 'is-invalid' : '' }}" type="number" name="max_age" id="max_age" value="{{ old('max_age', '') }}" step="1">
                 @if($errors->has('max_age'))
                     <div class="invalid-feedback">
                         {{ $errors->first('max_age') }}

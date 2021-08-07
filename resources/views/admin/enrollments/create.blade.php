@@ -47,7 +47,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.enrollment.fields.club_helper') }}</span>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="required" for="players">{{ trans('cruds.enrollment.fields.players') }}</label>
                 <div style="padding-bottom: 4px">
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
@@ -64,7 +64,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.enrollment.fields.players_helper') }}</span>
-            </div>
+            </div> -->
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}

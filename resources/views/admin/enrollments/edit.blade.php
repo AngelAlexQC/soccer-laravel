@@ -55,6 +55,7 @@
                     <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                 </div>
                 <select class="form-control select2 {{ $errors->has('players') ? 'is-invalid' : '' }}" name="players[]" id="players" multiple required>
+                   <option disabled>---Jugadores Disponibles--</option>
                     @foreach($players as $id => $players)
                         <option value="{{ $id }}" {{ (in_array($id, old('players', [])) || $enrollment->players->contains($id)) ? 'selected' : '' }}>{{ $players }}</option>
                     @endforeach

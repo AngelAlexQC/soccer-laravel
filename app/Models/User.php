@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable
@@ -35,6 +36,7 @@ class User extends Authenticatable
     ];
 
     protected $fillable = [
+        'birthdate',
         'name',
         'email',
         'email_verified_at',
@@ -81,7 +83,7 @@ class User extends Authenticatable
     public function setPasswordAttribute($input)
     {
         if ($input) {
-            $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
+            $this->attributes['password'] = app('hash')->needsRehash($input) ? FacadesHash::make($input) : $input;
         }
     }
 
@@ -98,5 +100,13 @@ class User extends Authenticatable
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+    public function getBirthdateAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+    public function setBirthdateAttribute($value)
+    {
+        $this->attributes['birthdate'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 }

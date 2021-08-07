@@ -10,6 +10,7 @@ use App\Models\Championship;
 use App\Models\Club;
 use App\Models\Enrollment;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,22 +47,58 @@ class EnrollmentController extends Controller
 
     public function store(StoreEnrollmentRequest $request)
     {
-        $enrollment = Enrollment::create($request->all());
+        $enrollment = Enrollment::firstOrCreate([
+            'championship_id' => $request->championship_id,
+            'club_id' => $request->club_id
+        ]);
+        $players = User::all()->map(function ($player) use ($enrollment, $request) {
+            $age =  Carbon::createFromFormat("d-m-Y", $player->birthdate)->age;
+            if (is_array($request->players)) {
+                foreach ($request->players as $p) {
+                    if (
+                        $player->id != $p &&
+                        $age > $enrollment->club->category->min_age &&
+                        $age < $enrollment->club->max_age &&
+                        count($player->playersEnrollments
+                            ->where(
+                                'championship_id',
+                                $enrollment->championship_id
+                            )) == 0
+                    ) return $player;
+                }
+            }
+        });
+
         $enrollment->players()->sync($request->input('players', []));
 
-        return redirect()->route('admin.enrollments.index');
+        return redirect()->route('admin.enrollments.edit', ['enrollment' => $enrollment->id]);
     }
 
     public function edit(Enrollment $enrollment)
     {
+
         abort_if(Gate::denies('enrollment_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $championships = Championship::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $clubs = Club::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $players = User::all()->pluck('name', 'id');
-
+        $players = User::all()->map(function ($player) use ($enrollment) {
+            $age =  Carbon::createFromFormat("d-m-Y", $player->birthdate)->age;
+            if (
+                $age - $enrollment->club->category->min_age > 0 &&
+                $enrollment->club->category->max_age > $age &&
+                count(
+                    $player->playersEnrollments
+                        ->where(
+                            'championship_id',
+                            $enrollment->championship_id
+                        )
+                ) == 0
+            )
+                return $player;
+        });
+        $players = $players->merge($enrollment->players)->pluck('name', 'id');
         $enrollment->load('championship', 'club', 'players');
 
         return view('admin.enrollments.edit', compact('championships', 'clubs', 'players', 'enrollment'));

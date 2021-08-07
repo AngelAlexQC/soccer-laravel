@@ -25,7 +25,11 @@ class DatabaseSeeder extends Seeder
     function make()
     {
         Championship::create([
-            'category_id' => Category::create(['name' => 'Categoría de prueba', 'min_age' => 18])->id,
+            'category_id' => Category::create([
+                'name' => 'Categoría de prueba',
+                'min_age' => 18,
+                'max_age' => 65
+            ])->id,
             'name' => 'LigaPro de Prueba',
         ]);
         Club::create([
@@ -108,7 +112,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Club Deportivo Universidad Católica',
             'slug' => 'Universidad Católica',
         ]);
-        Enrollment::create([
+        /* Enrollment::create([
             'championship_id' => 1,
             'club_id' => 1
         ]);
@@ -123,6 +127,6 @@ class DatabaseSeeder extends Seeder
         Enrollment::create([
             'championship_id' => 1,
             'club_id' => 4
-        ]);
+        ]); */
     }
 }

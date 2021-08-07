@@ -29,7 +29,7 @@ class StoreCategoryRequest extends FormRequest
                 'max:2147483647',
             ],
             'max_age' => [
-                'nullable',
+                'required',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
