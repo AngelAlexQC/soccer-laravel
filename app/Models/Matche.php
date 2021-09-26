@@ -38,13 +38,13 @@ class Matche extends Model
     public function getGoalsLocalAttribute()
     {
         return Event::where('type', 'goal')->where('match_id', $this->id)
-            ->where('club_id', $this->local->id)->get();
+            ->where('club_id', $this->local_id)->get();
     }
 
     public function getGoalsAwayAttribute()
     {
         return Event::where('type', 'goal')->where('match_id', $this->id)
-            ->where('club_id', $this->away->id)->get();
+            ->where('club_id', $this->away_id)->get();
     }
 
     public function getWinnerAttribute()

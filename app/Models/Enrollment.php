@@ -59,13 +59,14 @@ class Enrollment extends Model
     {
         $matches_won = 0;
         foreach ($this->localMatches()->where('start_date', '!=', null)->get() as $match) {
-            if ($match->goals_local > $match->goals_away) {
+
+            if (count($match->goals_local) > count($match->goals_away)) {
                 $matches_won++;
             }
         }
 
         foreach ($this->awayMatches()->where('start_date', '!=', null)->get() as $match) {
-            if ($match->goals_away > $match->goals_local) {
+            if (count($match->goals_away) > count($match->goals_local)) {
                 $matches_won++;
             }
         }
@@ -77,13 +78,13 @@ class Enrollment extends Model
     {
         $matches_lost = 0;
         foreach ($this->localMatches()->where('start_date', '!=', null)->get() as $match) {
-            if ($match->goals_local < $match->goals_away) {
+            if (count($match->goals_local) < count($match->goals_away)) {
                 $matches_lost++;
             }
         }
 
         foreach ($this->awayMatches()->where('start_date', '!=', null)->get() as $match) {
-            if ($match->goals_away < $match->goals_local) {
+            if (count($match->goals_away) < count($match->goals_local)) {
                 $matches_lost++;
             }
         }
