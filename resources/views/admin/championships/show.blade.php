@@ -93,7 +93,7 @@
                 role="tab"
                 data-toggle="tab"
             >
-                {{ trans("cruds.club.title") }}
+                Tabla de Posiciones
             </a>
         </li>
     </ul>
@@ -164,14 +164,19 @@
                                 class="btn btn-xs btn-primary"
                                 href="{{ route('admin.matches.show', $matche->id) }}"
                             >
-                                {{ trans("global.view") }}
+                                Detalle
+                                <i class="fa fa-info" aria-hidden="true"></i>
                             </a>
                             @endcan @can('match_edit')
                             <a
                                 class="btn btn-xs btn-info"
                                 href="{{ route('admin.matches.edit', $matche->id) }}"
                             >
-                                {{ trans("global.edit") }}
+                                Cambiar Fecha
+                                <i
+                                    class="fa fa-calendar"
+                                    aria-hidden="true"
+                                ></i>
                             </a>
                             @endcan
                         </td>
@@ -191,20 +196,49 @@
                 "
             >
                 <thead class="thead-inverse">
-                    <tr>
+                    <tr class="text-center">
                         <th>Equipo</th>
-                        <th>Puntos</th>
+                        <th>PJ</th>
+                        <th>PG</th>
+                        <th>PE</th>
+                        <th>PP</th>
+                        <th>GF</th>
+                        <th>GC</th>
+                        <th>PTS</th>
+                        <th>GD</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($championship->championshipEnrollments as
-                    $enrollment)
+                    @foreach($orderedChampionshipEnrollments as $enrollment)
                     <tr>
                         <td scope="row">
                             {{ $enrollment->club->name }}
                         </td>
+                        <td>
+                            {{ $enrollment->matches_played() }}
+                        </td>
+                        <td>
+                            {{ $enrollment->matches_won() }}
+                        </td>
+                        <td>
+                            {{ $enrollment->matches_draw() }}
+                        </td>
+                        <td>
+                            {{ $enrollment->matches_lost() }}
+                        </td>
+                        <td>
+                            {{ $enrollment->goals_for() }}
+                        </td>
+                        <td>
+                            {{ $enrollment->goals_against() }}
+                        </td>
                         <td scope="row">
                             {{ $enrollment->points }}
+                        </td>
+                        <td class="text-end">
+                            {{
+                                $enrollment->goals_difference()
+                            }}
                         </td>
                     </tr>
                     @endforeach

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Championship;
 use App\Models\Club;
 use App\Models\Enrollment;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -112,21 +113,18 @@ class DatabaseSeeder extends Seeder
             'name' => 'Club Deportivo Universidad Católica',
             'slug' => 'Universidad Católica',
         ]);
-        /* Enrollment::create([
-            'championship_id' => 1,
-            'club_id' => 1
-        ]);
-        Enrollment::create([
-            'championship_id' => 1,
-            'club_id' => 2
-        ]);
-        Enrollment::create([
-            'championship_id' => 1,
-            'club_id' => 3
-        ]);
-        Enrollment::create([
-            'championship_id' => 1,
-            'club_id' => 4
-        ]); */
+
+        $clubs = Club::all();
+        foreach ($clubs as $club) {
+
+            $players = User::factory()->count(rand(13, 20))->create();
+
+            $enrollment = Enrollment::create([
+                'championship_id' => Championship::first()->id,
+                'club_id' => $club->id,
+            ]);
+
+            $enrollment->players()->attach($players->pluck('id'));
+        }
     }
 }

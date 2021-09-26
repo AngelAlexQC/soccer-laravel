@@ -38,6 +38,7 @@ class Championship extends Model
         return $this->hasMany(Enrollment::class, 'championship_id', 'id');
     }
 
+
     public function championshipMatches()
     {
         return $this->hasMany(Matche::class, 'championship_id', 'id')->orderBy('round');

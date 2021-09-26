@@ -68,7 +68,7 @@
                         </th>
                         <td>
                             @if($match->winner)
-                            {{ $match->winner }}
+                            {{ $match->winner->name }}
                             @else
                             Empate
                             @endif

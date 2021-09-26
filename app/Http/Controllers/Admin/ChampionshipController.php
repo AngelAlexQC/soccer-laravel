@@ -65,8 +65,10 @@ class ChampionshipController extends Controller
         abort_if(Gate::denies('championship_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $championship->load('category', 'championshipEnrollments');
+        // Sort by desc
+        $orderedChampionshipEnrollments = $championship->championshipEnrollments->sortByDesc('points');
 
-        return view('admin.championships.show', compact('championship'));
+        return view('admin.championships.show', compact('championship', 'orderedChampionshipEnrollments'));
     }
 
     public function generate($id)
