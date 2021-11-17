@@ -32,7 +32,6 @@ class Enrollment extends Model
 
     public $appends = [
         'points',
-        'goals_difference'
     ];
 
     public function getNameAttribute($value)
