@@ -31,6 +31,14 @@
                             {{ $permission->title }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            Descripción
+                        </th>
+                        <td>
+                            {{ $permission->description }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

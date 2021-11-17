@@ -29,6 +29,9 @@
                             {{ trans('cruds.permission.fields.title') }}
                         </th>
                         <th>
+                            Descripción
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -44,6 +47,9 @@
                             </td>
                             <td>
                                 {{ $permission->title ?? '' }}
+                            </td>
+                            <td>
+                                {{ $permission->description ?? '' }}
                             </td>
                             <td>
                                 @can('permission_show')
