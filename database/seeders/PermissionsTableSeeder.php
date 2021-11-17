@@ -9,197 +9,200 @@ class PermissionsTableSeeder extends Seeder
 {
     public function run()
     {
-        $permissions = [
+
+
+        $permissionsSpanish = [
             [
                 'id'    => 1,
-                'title' => 'user_management_access',
+                'title' => 'Acceso a la gestión de usuarios',
             ],
             [
                 'id'    => 2,
-                'title' => 'permission_create',
+                'title' => 'creación de permisos',
             ],
             [
                 'id'    => 3,
-                'title' => 'permission_edit',
+                'title' => 'edición de permisos',
             ],
             [
                 'id'    => 4,
-                'title' => 'permission_show',
+                'title' => 'visualización de permisos',
             ],
             [
                 'id'    => 5,
-                'title' => 'permission_delete',
+                'title' => 'eliminación de permisos',
             ],
             [
                 'id'    => 6,
-                'title' => 'permission_access',
+                'title' => 'acceso a permisos',
             ],
             [
                 'id'    => 7,
-                'title' => 'role_create',
+                'title' => 'creación de roles',
             ],
             [
                 'id'    => 8,
-                'title' => 'role_edit',
+                'title' => 'edición de roles',
             ],
             [
                 'id'    => 9,
-                'title' => 'role_show',
+                'title' => 'visualización de roles',
             ],
             [
                 'id'    => 10,
-                'title' => 'role_delete',
+                'title' => 'eliminación de roles',
             ],
             [
                 'id'    => 11,
-                'title' => 'role_access',
+                'title' => 'acceso a roles',
             ],
             [
                 'id'    => 12,
-                'title' => 'user_create',
+                'title' => 'creación de usuarios',
             ],
             [
                 'id'    => 13,
-                'title' => 'user_edit',
+                'title' => 'edición de usuarios',
             ],
             [
                 'id'    => 14,
-                'title' => 'user_show',
+                'title' => 'visualización de usuarios',
             ],
             [
                 'id'    => 15,
-                'title' => 'user_delete',
+                'title' => 'eliminación de usuarios',
             ],
             [
                 'id'    => 16,
-                'title' => 'user_access',
+                'title' => 'acceso a usuarios',
             ],
             [
                 'id'    => 17,
-                'title' => 'club_create',
+                'title' => 'creación de clubes',
             ],
             [
                 'id'    => 18,
-                'title' => 'club_edit',
+                'title' => 'edición de clubes',
             ],
             [
                 'id'    => 19,
-                'title' => 'club_show',
+                'title' => 'visualización de clubes',
             ],
             [
                 'id'    => 20,
-                'title' => 'club_delete',
+                'title' => 'eliminación de clubes',
             ],
             [
                 'id'    => 21,
-                'title' => 'club_access',
+                'title' => 'acceso a clubes',
             ],
             [
                 'id'    => 22,
-                'title' => 'category_create',
+                'title' => 'creación de categorías',
             ],
             [
                 'id'    => 23,
-                'title' => 'category_edit',
+                'title' => 'edición de categorías',
             ],
             [
                 'id'    => 24,
-                'title' => 'category_show',
+                'title' => 'visualización de categorías',
             ],
             [
                 'id'    => 25,
-                'title' => 'category_delete',
+                'title' => 'eliminación de categorías',
             ],
             [
                 'id'    => 26,
-                'title' => 'category_access',
+                'title' => 'acceso a categorías',
             ],
             [
                 'id'    => 27,
-                'title' => 'championship_create',
+                'title' => 'creación de campeonatos',
             ],
             [
                 'id'    => 28,
-                'title' => 'championship_edit',
+                'title' => 'edición de campeonatos',
             ],
             [
                 'id'    => 29,
-                'title' => 'championship_show',
+                'title' => 'visualización de campeonatos',
             ],
             [
                 'id'    => 30,
-                'title' => 'championship_delete',
+                'title' => 'eliminación de campeonatos',
             ],
             [
                 'id'    => 31,
-                'title' => 'championship_access',
+                'title' => 'acceso a campeonatos',
             ],
             [
                 'id'    => 32,
-                'title' => 'enrollment_create',
+                'title' => 'creación de inscripciones',
             ],
             [
                 'id'    => 33,
-                'title' => 'enrollment_edit',
+                'title' => 'edición de inscripciones',
             ],
             [
                 'id'    => 34,
-                'title' => 'enrollment_show',
+                'title' => 'visualización de inscripciones',
             ],
             [
                 'id'    => 35,
-                'title' => 'enrollment_delete',
+                'title' => 'eliminación de inscripciones',
             ],
             [
                 'id'    => 36,
-                'title' => 'enrollment_access',
+                'title' => 'acceso a inscripciones',
             ],
             [
                 'id'    => 37,
-                'title' => 'match_create',
+                'title' => 'creación de partidos',
             ],
             [
                 'id'    => 38,
-                'title' => 'match_edit',
+                'title' => 'edición de partidos',
             ],
             [
                 'id'    => 39,
-                'title' => 'match_show',
+                'title' => 'visualización de partidos',
             ],
             [
                 'id'    => 40,
-                'title' => 'match_delete',
+                'title' => 'eliminación de partidos',
             ],
             [
                 'id'    => 41,
-                'title' => 'match_access',
+                'title' => 'acceso a partidos',
             ],
             [
                 'id'    => 42,
-                'title' => 'event_create',
+                'title' => 'creación de eventos',
             ],
             [
                 'id'    => 43,
-                'title' => 'event_edit',
+                'title' => 'edición de eventos',
             ],
             [
                 'id'    => 44,
-                'title' => 'event_show',
+                'title' => 'visualización de eventos',
             ],
             [
                 'id'    => 45,
-                'title' => 'event_delete',
+                'title' => 'eliminación de eventos',
             ],
             [
                 'id'    => 46,
-                'title' => 'event_access',
+                'title' => 'acceso a eventos',
             ],
             [
                 'id'    => 47,
-                'title' => 'profile_password_edit',
+                'title' => 'edición de contraseña de perfil',
             ],
+
         ];
 
-        Permission::insert($permissions);
+        Permission::insert($permissionsSpanish);
     }
 }
