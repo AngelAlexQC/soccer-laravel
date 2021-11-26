@@ -20,6 +20,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
 
+    // Players
+    Route::delete('players/destroy', 'PlayerController@massDestroy')->name('players.massDestroy');
+    Route::resource('players', 'PlayerController');
+
     // Club
     Route::delete('clubs/destroy', 'ClubController@massDestroy')->name('clubs.massDestroy');
     Route::post('clubs/media', 'ClubController@storeMedia')->name('clubs.storeMedia');

@@ -40,8 +40,8 @@ return [
         ],
     ],
     'user' => [
-        'title'          => 'Jugadores',
-        'title_singular' => 'Jugador',
+        'title'          => 'Usuarios',
+        'title_singular' => 'Usuario',
         'fields'         => [
             'id'                       => 'ID',
             'id_helper'                => ' ',
@@ -93,7 +93,7 @@ return [
         ],
     ],
     'category' => [
-        'title'          => 'Categories',
+        'title'          => 'Categorías',
         'title_singular' => 'Categoría',
         'fields'         => [
             'id'                => 'ID',
@@ -113,7 +113,7 @@ return [
         ],
     ],
     'championship' => [
-        'title'          => 'Campeonato',
+        'title'          => 'Campeonatos',
         'title_singular' => 'Campeonato',
         'fields'         => [
             'id'                => 'ID',
@@ -132,6 +132,28 @@ return [
             'deleted_at_helper' => ' ',
             'category'          => 'Categoría',
             'category_helper'   => ' ',
+        ],
+    ],
+    'player' => [
+        'title'          => 'Jugadores',
+        'title_singular' => 'Jugador',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => ' ',
+            'name'              => 'Nombre',
+            'name_helper'       => 'Nombre completo del jugador',
+            'dni'               => 'Cédula',
+            'dni_helper'        => ' ',
+            'approved'         => 'Aprobado',
+            'approved_helper'  => ' ',
+            'birthdate'         => 'Fecha de Nacimiento',
+            'birthdate_helper'  => ' ',
+            'created_at'        => 'Creado en',
+            'created_at_helper' => ' ',
+            'updated_at'        => 'Actualizado en',
+            'updated_at_helper' => ' ',
+            'deleted_at'        => 'Borrado en',
+            'deleted_at_helper' => ' ',
         ],
     ],
     'enrollment' => [

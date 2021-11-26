@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Championship;
 use App\Models\Club;
 use App\Models\Enrollment;
-use App\Models\User;
+use App\Models\Player;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -116,8 +116,7 @@ class DatabaseSeeder extends Seeder
 
         $clubs = Club::all();
         foreach ($clubs as $club) {
-
-            $players = User::factory()->count(rand(13, 20))->create();
+            $players = Player::factory()->count(rand(13, 20))->create();
 
             $enrollment = Enrollment::create([
                 'championship_id' => Championship::first()->id,

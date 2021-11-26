@@ -58,7 +58,6 @@ class Enrollment extends Model
     {
         $matches_won = 0;
         foreach ($this->localMatches()->where('start_date', '!=', null)->get() as $match) {
-
             if (count($match->goals_local) > count($match->goals_away)) {
                 $matches_won++;
             }
@@ -176,6 +175,7 @@ class Enrollment extends Model
 
         return $goals_against;
     }
+
     // Goals Difference
     public function goals_difference()
     {
@@ -194,7 +194,7 @@ class Enrollment extends Model
 
     public function players()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(Player::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)
