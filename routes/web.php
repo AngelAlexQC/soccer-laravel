@@ -51,6 +51,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('events', 'EventController');
 
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
+    Route::get('system-calendar/{championship}', 'SystemCalendarController@show')->name('systemCalendar.show');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
     // Change password

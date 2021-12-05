@@ -13,6 +13,7 @@ class CreateChampionshipsTable extends Migration
             $table->string('name')->unique();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

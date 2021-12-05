@@ -1,10 +1,7 @@
 @extends('layouts.admin') @section('content') @can('championship_create')
 <div style="margin-bottom: 10px" class="row">
     <div class="col-lg-12">
-        <a
-            class="btn btn-success"
-            href="{{ route('admin.championships.create') }}"
-        >
+        <a class="btn btn-success" href="{{ route('admin.championships.create') }}">
             {{ trans("global.add") }}
             {{ trans("cruds.championship.title_singular") }}
         </a>
@@ -19,12 +16,10 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table
-                class="
+            <table class="
                     table table-bordered table-striped table-hover
                     datatable datatable-Championship
-                "
-            >
+                ">
                 <thead>
                     <tr>
                         <th width="10"></th>
@@ -43,23 +38,18 @@
                         <th>
                             {{ trans("cruds.championship.fields.category") }}
                         </th>
+                        <th>
+                            {{ trans("cruds.championship.fields.active") }}
+                        </th>
                         <th>&nbsp;</th>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <input
-                                class="search"
-                                type="text"
-                                placeholder="{{ trans('global.search') }}"
-                            />
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}" />
                         </td>
                         <td>
-                            <input
-                                class="search"
-                                type="text"
-                                placeholder="{{ trans('global.search') }}"
-                            />
+                            <input class="search" type="text" placeholder="{{ trans('global.search') }}" />
                         </td>
                         <td></td>
                         <td></td>
@@ -73,6 +63,7 @@
                                 @endforeach
                             </select>
                         </td>
+                        <td></td>
                         <td></td>
                     </tr>
                 </thead>
@@ -96,14 +87,32 @@
                             {{ $championship->category->name ?? '' }}
                         </td>
                         <td>
+                            <span style="display:none">{{ $championship->active ?? '' }}</span>
+                            <input type="checkbox" disabled="disabled" {{ $championship->active ? 'checked' : '' }}>
+                        </td>
+                        <td>
                             @can('championship_show')
-                            <a
-                                class="btn btn-xs btn-primary"
-                                href="{{ route('admin.championships.show', $championship->id) }}"
-                            >
+                            <a class="btn btn-xs btn-primary"
+                                href="{{ route('admin.championships.show', $championship->id) }}">
                                 Detalle
                                 <i class="fa fa-info" aria-hidden="true"></i>
                             </a>
+                            @endcan
+                            @can('championship_edit')
+                            <br>
+                            <a class="btn btn-xs btn-info"
+                                href="{{ route('admin.championships.edit', $championship->id) }}">
+                                {{ trans('global.edit') }}
+                            </a>
+                            @endcan
+                            @can('championship_delete')
+                            <form action="{{ route('admin.championships.destroy', $championship->id) }}" method="POST"
+                                onsubmit="return confirm(`{{ trans('global.areYouSure') }}`);"
+                                style="display: inline-block;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                            </form>
                             @endcan
                         </td>
                     </tr>

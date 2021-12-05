@@ -77,9 +77,7 @@ class ChampionshipController extends Controller
         $clubs = $championship->championshipEnrollments->toArray();
         $rounds = $this->generateFixtures($clubs, $championship);
 
-        return redirect()->route('admin.championships.show', [
-            'championship' => $championship->id,
-        ])->with(
+        return back()->with(
             'message',
             count($rounds) > 0 ? 'Partidos generados con éxito' : 'Debe haber un número par de equipos'
         );

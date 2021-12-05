@@ -131,6 +131,7 @@ return [
             'deleted_at_helper' => ' ',
             'category'          => 'Category',
             'category_helper'   => ' ',
+            'active'            => 'Active',
         ],
     ],
     'enrollment' => [

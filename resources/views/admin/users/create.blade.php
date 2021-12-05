@@ -47,7 +47,7 @@
                         {{ $errors->first('birthdate') }}
                     </div>
                 @endif
-                <span class="help-block">Ingrese la fecha de Nacimiento del Jugador</span>
+                <span class="help-block">Ingrese la fecha de Nacimiento del Usuario</span>
             </div>
             <div class="form-group">
                 <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>

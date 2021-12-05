@@ -7,11 +7,22 @@
     </div>
 
     <div class="card-body">
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
 
+        <!-- Buttons for each championship -->
+        <div class="container-fluid-border">
+            @foreach($championships as $championship)
+            <a class="btn btn-primary" href="{{route('admin.systemCalendar.show', $championship->id)}}">
+                {{$championship->name}}
+            </a>
+            @endforeach
+        </div>
+
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
         <div id='calendar'></div>
     </div>
 </div>
+
+
 
 
 
@@ -23,14 +34,14 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 <script>
     $(document).ready(function () {
-            // page is now ready, initialize the calendar...
-            events={!! json_encode($events) !!};
-            $('#calendar').fullCalendar({
-                // put your options and callbacks here
-                events: events,
+        // page is now ready, initialize the calendar...
+        events = {!! json_encode($events); !!};
+    $('#calendar').fullCalendar({
+        // put your options and callbacks here
+        events: events,
 
 
-            })
+    })
         });
 </script>
 @stop

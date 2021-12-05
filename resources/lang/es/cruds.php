@@ -132,6 +132,7 @@ return [
             'deleted_at_helper' => ' ',
             'category'          => 'Categoría',
             'category_helper'   => ' ',
+            'active'            => 'Activo',
         ],
     ],
     'player' => [

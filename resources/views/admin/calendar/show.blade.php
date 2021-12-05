@@ -1,78 +1,29 @@
-@extends('layouts.admin') @section('content')
+@extends('layouts.admin')
+@section('content')
 
 <div class="card">
     <div class="card-header">
-        {{ trans("global.show") }} {{ trans("cruds.championship.title") }}
+        {{ trans('global.systemCalendar') }} {{$championship->name}}
     </div>
 
     <div class="card-body">
-        <div class="form-group">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.championships.index') }}">
-                    {{ trans("global.back_to_list") }}
-                </a>
-            </div>
-            <table class="table table-bordered table-striped">
-                <tbody>
-                    <tr>
-                        <th>
-                            {{ trans("cruds.championship.fields.id") }}
-                        </th>
-                        <td>
-                            {{ $championship->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans("cruds.championship.fields.name") }}
-                        </th>
-                        <td>
-                            {{ $championship->name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans("cruds.championship.fields.start_date") }}
-                        </th>
-                        <td>
-                            {{ $championship->start_date }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans("cruds.championship.fields.end_date") }}
-                        </th>
-                        <td>
-                            {{ $championship->end_date }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans("cruds.championship.fields.category") }}
-                        </th>
-                        <td>
-                            {{ $championship->category->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.championship.fields.active') }}
-                        </th>
-                        <td>
-                            <input type="checkbox" disabled="disabled" {{ $championship->active ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.championships.index') }}">
-                    {{ trans("global.back_to_list") }}
-                </a>
-            </div>
+
+        <!-- Buttons for each championship -->
+        <div class="container-fluid-border">
+            @foreach($championships as $championship)
+            <a class="btn btn-primary" href="{{route('admin.systemCalendar.show', $championship->id)}}">
+                {{$championship->name}}
+            </a>
+            @endforeach
         </div>
+
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
+        <div id='calendar'></div>
     </div>
 </div>
 
+<!-- If championship is set, show the championship -->
+@if(isset($championship))
 <div class="card">
     <div class="card-header">
         {{ trans("global.relatedData") }}
@@ -218,5 +169,23 @@
         </div>
     </div>
 </div>
-
+@endif
 @endsection
+
+@section('scripts')
+@parent
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
+<script>
+    $(document).ready(function () {
+        // page is now ready, initialize the calendar...
+        events = {!! json_encode($events); !!};
+    $('#calendar').fullCalendar({
+        // put your options and callbacks here
+        events: events,
+
+
+    })
+        });
+</script>
+@stop
