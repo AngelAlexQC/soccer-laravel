@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateEnrollmentRequest;
 use App\Models\Championship;
 use App\Models\Club;
 use App\Models\Enrollment;
+use App\Models\Player;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -51,7 +52,7 @@ class EnrollmentController extends Controller
             'championship_id' => $request->championship_id,
             'club_id' => $request->club_id,
         ]);
-        $players = User::all()->map(function ($player) use ($enrollment, $request) {
+        $players = Player::all()->map(function ($player) use ($enrollment, $request) {
             $age = Carbon::createFromFormat('d-m-Y', $player->birthdate)->age;
             if (is_array($request->players)) {
                 foreach ($request->players as $p) {
@@ -84,7 +85,7 @@ class EnrollmentController extends Controller
 
         $clubs = Club::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $players = User::all()->map(function ($player) use ($enrollment) {
+        $players = Player::all()->map(function ($player) use ($enrollment) {
             $age = Carbon::createFromFormat('d-m-Y', $player->birthdate)->age;
             if (
                 $age - $enrollment->club->category->min_age > 0 &&
