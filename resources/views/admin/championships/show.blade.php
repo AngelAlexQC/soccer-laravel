@@ -159,6 +159,10 @@
             </table>
         </div>
         <div class="tab-pane" role="tabpanel" id="championship_enrollments">
+        <a class="btn btn-danger mb-3" href="{{url('admin/championships/'.$championship->id.'/export')}}" role="button">
+                <i class="fas fa-file-pdf"></i>Exportar a PDF
+            </a>
+            <br>
             <table class="
                     table
                     table-striped

@@ -71,6 +71,15 @@ class ChampionshipController extends Controller
         return view('admin.championships.show', compact('championship', 'orderedChampionshipEnrollments'));
     }
 
+    public function export(Request $request,Championship $championship){
+        $championship->load('category', 'championshipEnrollments');
+        // Sort by desc
+        $orderedChampionshipEnrollments = $championship->championshipEnrollments->sortByDesc('points');
+        
+        return \PDF::loadView('admin.championships.export', compact('championship', 'orderedChampionshipEnrollments'))
+            ->setPaper('a4', 'landscape')->stream('notas.pdf');
+    }
+
     public function generate($id)
     {
         $championship = Championship::findOrFail($id);
