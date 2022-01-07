@@ -1,26 +1,4 @@
-@extends('layouts.admin')
-@section('content')
-
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.systemCalendar') }} {{$championship->name}}
-    </div>
-
-    <div class="card-body">
-
-        <!-- Buttons for each championship -->
-        <div class="container-fluid-border">
-            @foreach($championships as $championship)
-            <a class="btn btn-primary" href="{{route('admin.systemCalendar.show', $championship->id)}}">
-                {{$championship->name}}
-            </a>
-            @endforeach
-        </div>
-
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
-        <div id='calendar'></div>
-    </div>
-</div>
+@extends('layouts.admin') @section('content')
 
 <!-- If championship is set, show the championship -->
 @if(isset($championship))
@@ -30,28 +8,48 @@
     </div>
     <ul class="nav nav-tabs px-3" role="tablist" id="relationship-tabs">
         <li class="nav-item active">
-            <a class="nav-link active" href="#championship_matches" role="tab" data-toggle="tab">
+            <a
+                class="nav-link active"
+                href="#championship_matches"
+                role="tab"
+                data-toggle="tab"
+            >
                 {{ trans("cruds.match.title") }}
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#championship_enrollments" role="tab" data-toggle="tab">
+            <a
+                class="nav-link"
+                href="#championship_enrollments"
+                role="tab"
+                data-toggle="tab"
+            >
                 Tabla de Posiciones
             </a>
         </li>
     </ul>
     <div class="tab-content p-3">
-        <div class="tab-pane w-100 active" role="tabpanel" id="championship_matches">
-            <table class="table table-striped table-hover table-inverse datatable">
+        <div
+            class="tab-pane w-100 active"
+            role="tabpanel"
+            id="championship_matches"
+        >
+            <table
+                class="table table-striped table-hover table-inverse datatable"
+            >
                 <div class="w-100">
                     <div class="row mb-3">
                         <div class="col">
-                            <a type="button" class="btn btn-primary" href="{{
+                            <a
+                                type="button"
+                                class="btn btn-primary"
+                                href="{{
                                     route(
                                         'admin.championships.generate',
                                         ['championship'=>$championship->id]
                                     )
-                                }}">
+                                }}"
+                            >
                                 Generar Partidos
                             </a>
                         </div>
@@ -93,14 +91,23 @@
                         </td>
                         <td>
                             @can('match_show')
-                            <a class="btn btn-xs btn-primary" href="{{ route('admin.matches.show', $matche->id) }}">
+                            <a
+                                class="btn btn-xs btn-primary"
+                                href="{{ route('admin.matches.show', $matche->id) }}"
+                            >
                                 Detalle
                                 <i class="fa fa-info" aria-hidden="true"></i>
                             </a>
                             @endcan @can('match_edit')
-                            <a class="btn btn-xs btn-info" href="{{ route('admin.matches.edit', $matche->id) }}">
+                            <a
+                                class="btn btn-xs btn-info"
+                                href="{{ route('admin.matches.edit', $matche->id) }}"
+                            >
                                 Cambiar Fecha
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                <i
+                                    class="fa fa-calendar"
+                                    aria-hidden="true"
+                                ></i>
                             </a>
                             @endcan
                         </td>
@@ -110,17 +117,17 @@
             </table>
         </div>
         <div class="tab-pane" role="tabpanel" id="championship_enrollments">
-            <a class="btn btn-danger mb-3" href="{{url('admin/championships/'.$championship->id.'/export')}}" role="button">
+            <a
+                class="btn btn-danger mb-3"
+                href="{{url('admin/championships/'.$championship->id.'/export')}}"
+                role="button"
+            >
                 <i class="fas fa-file-pdf"></i>Exportar a PDF
             </a>
-            <br>
-            <table class="
-                    table
-                    table-striped
-                    table-hover
-                    table-inverse
-                    table-responsive
-                ">
+            <br />
+            <table
+                class="table table-striped table-hover table-inverse table-responsive"
+            >
                 <thead class="thead-inverse">
                     <tr class="text-center">
                         <th>Equipo</th>
@@ -174,12 +181,36 @@
     </div>
 </div>
 @endif
-@endsection
+<div class="card">
+    <div class="card-header">
+        {{ trans("global.systemCalendar") }} {{$championship->name}}
+    </div>
 
-@section('scripts')
-@parent
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
+    <div class="card-body">
+        <!-- Buttons for each championship -->
+        <div class="container-fluid-border">
+            @foreach($championships as $championship)
+            <a
+                class="btn btn-primary"
+                href="{{route('admin.systemCalendar.show', $championship->id)}}"
+            >
+                {{$championship->name}}
+            </a>
+            @endforeach
+        </div>
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css"
+        />
+        <div id="calendar"></div>
+    </div>
+</div>
+@endsection @section('scripts') @parent
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale-all.js"></script>
+
 <script>
     $(document).ready(function () {
         // page is now ready, initialize the calendar...
@@ -187,7 +218,7 @@
     $('#calendar').fullCalendar({
         // put your options and callbacks here
         events: events,
-
+        locale: '{{App::getLocale()}}',
 
     })
         });
