@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'Laravel Soccer',
+    'site_title' => 'Soccer Admin',
 ];
