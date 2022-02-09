@@ -145,7 +145,7 @@
                     @foreach($orderedChampionshipEnrollments as $enrollment)
                     <tr>
                         <td scope="row">
-                            {{ $enrollment->club->name }}
+                            {{ $enrollment->club ? $enrollment->club->name : 'Sin equipo' }}
                         </td>
                         <td>
                             {{ $enrollment->matches_played() }}
