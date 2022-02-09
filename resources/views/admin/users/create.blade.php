@@ -91,16 +91,6 @@
                 <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="dni">{{ trans('cruds.user.fields.dni') }}</label>
-                <input class="form-control {{ $errors->has('dni') ? 'is-invalid' : '' }}" type="text" name="dni" id="dni" value="{{ old('dni', '') }}" required>
-                @if($errors->has('dni'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('dni') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.dni_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

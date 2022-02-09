@@ -36,7 +36,12 @@ class Enrollment extends Model
 
     public function getNameAttribute($value)
     {
-        return $this->club->name . ': ' . $this->championship->name;
+        if($this->club){
+            return $this->club->name . ': ' . $this->championship->name;
+        }else{
+            return $value;
+        }
+        
     }
 
     public function localMatches()
