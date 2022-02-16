@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', function(){
     // Redirect to 'admin'
-    return redirect()->route('admin');
+    return redirect('admin');
 });
 Auth::routes();
 
