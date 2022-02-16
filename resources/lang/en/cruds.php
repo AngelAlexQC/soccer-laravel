@@ -132,6 +132,7 @@ return [
             'category'          => 'Category',
             'category_helper'   => ' ',
             'active'            => 'Active',
+            'active_helper'     => ' ',
         ],
     ],
     'enrollment' => [

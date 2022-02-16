@@ -133,6 +133,7 @@ return [
             'category'          => 'Categoría',
             'category_helper'   => ' ',
             'active'            => 'Activo',
+            'active_helper'     => ' ',
         ],
     ],
     'player' => [
